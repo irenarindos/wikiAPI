@@ -10,11 +10,11 @@ def getTableOfContentsAsList(soup):
         tocList.append(t.get_text())
     return tocList
     
-def getTableOfContentsAsText(soup):
+def getTableOfContentsAsText(tocList):
     tocText = '<ul>'
-    x= soup.find_all("span", class_="toctext")
-    for t in x:
-        tocText+= '<li>'+t.get_text()
+    for t in tocList:
+        tocText += '<li>'+t
+
     tocText+='</ul>'
     return tocText
     
@@ -80,7 +80,7 @@ def lambda_handler(event, context):
             html =f"Bad Request. Parameters provided are not recognized"
 
     else:
-        html = getTableOfContentsAsText(soup)
+        html = getTableOfContentsAsText(tocList)
     return {
         'statusCode': statusCode,
         'body': html,
