@@ -7,7 +7,8 @@ def getSummary(soup):
     summary =soup.find_all("p", limit=2)
     sText =''
     for s in summary:
-        sText+= str(s)
+        sText+= s.get_text()
+        sText+='<p>'
     return sText
 
 def lambda_handler(event, context):
