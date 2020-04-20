@@ -41,7 +41,8 @@ def getSectionText(sectionName, soup):
     while nextNode:
         if isinstance(nextNode, Tag):
            if nextNode.name =="p":
-                sectionText+= str(nextNode)
+                sectionText+= nextNode.get_text()
+                sectionText+='<p>'
            if nextNode.name == "ul":
                 sectionText += str(nextNode)
            if nextNode.name == "li":
